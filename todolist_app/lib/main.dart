@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_app/Modal/item.dart';
 import 'package:todolist_app/Widget/cardBody.dart';
+import 'package:todolist_app/Widget/modalButton.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   MyApp({Key? key}) : super(key: key);
+
+  final List<DataItem> items =  [
+    DataItem(id: '1', name:'Tập thể dục'),
+    DataItem(id: '2', name:'Ăn sáng'),
+    DataItem(id: '3', name:'Học tiếng Nhật'),
+    DataItem(id: '4', name:'Học Flutter'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: HomeScreen(items: items),
     );
   }
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final List<DataItem> items; 
+  HomeScreen({Key? key,required this.items}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +46,24 @@ class HomeScreen extends StatelessWidget {
      body: SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Column(
-        children: [
-          CardBody(),
-          CardBody(),
-          CardBody(),
-          CardBody(),
-          CardBody(),            
-        ],
+        children: items.map((item) => CardBody(item: item)).toList(),
       ),
      ),
      floatingActionButton: FloatingActionButton(
-      onPressed: (){},
+      onPressed: (){
+        showModalBottomSheet(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          isScrollControlled: true,
+          context: context, 
+          builder: (BuildContext context){
+          return modalButton();
+
+        });
+      },
       child: Icon(Icons.add, size: 40, color: Colors.pinkAccent),
       backgroundColor: Colors.white,
       ),
     );
   }
 }
+

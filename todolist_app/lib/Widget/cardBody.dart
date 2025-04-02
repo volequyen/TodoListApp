@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardBody extends StatelessWidget {
-  const CardBody({Key? key}) : super(key: key); 
+   CardBody({
+    Key? key,
+    required this.item,
+  }) : super(key: key); 
+  var item;
 
   @override
   Widget build(BuildContext context) { 
@@ -13,13 +17,13 @@ class CardBody extends StatelessWidget {
         color: Colors.pinkAccent,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const Padding(
+      child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Tap the duc buoi sang',
+              item.name,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
