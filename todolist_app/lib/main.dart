@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_app/Widget/cardBody.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,11 +32,22 @@ class HomeScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.pinkAccent,
      ),
-     body: Container(),
+     body: SingleChildScrollView(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      child: Column(
+        children: [
+          CardBody(),
+          CardBody(),
+          CardBody(),
+          CardBody(),
+          CardBody(),            
+        ],
+      ),
+     ),
      floatingActionButton: FloatingActionButton(
       onPressed: (){},
-      child: Icon(Icons.add, size: 40, color: Colors.white,),
-      backgroundColor: Colors.pinkAccent,
+      child: Icon(Icons.add, size: 40, color: Colors.pinkAccent),
+      backgroundColor: Colors.white,
       ),
     );
   }
