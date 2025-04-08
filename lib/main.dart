@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontSize: 25, color: Colors.white)
           ),
       ),
-      backgroundColor: Colors.pinkAccent,
+      backgroundColor: Colors.purpleAccent,
      ),
      body: SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
