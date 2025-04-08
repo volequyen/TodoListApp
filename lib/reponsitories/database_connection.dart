@@ -16,6 +16,6 @@ class DatabaseConnection {
   }
 
   Future _onCreatingDatabase(Database database, int version) async{
-    await database.execute("CREATE TABLE tasks(id TEXT PRIMARY KEY, name TEXT)");
+    await database.execute("CREATE TABLE tasks(id STRING PRIMARY KEY, name STRING)");
   }
 }

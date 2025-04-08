@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist_app/Modal/item.dart';
 import 'package:todolist_app/Widget/CardBody.dart';
 import 'package:todolist_app/Widget/ModalButton.dart';
+import 'package:todolist_app/serviecs/item_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,14 +37,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-   void handleAddTask(String name){
+  final ItemService  _itemservice = ItemService();
+    void initState() {
+    super.initState();
+    _loadItemsFromDB(); // Load dữ liệu khi app khởi động
+  }
+
+  Future<void> _loadItemsFromDB() async {
+    List<DataItem> loadedItems = await _itemservice.readAllItem();
+    setState(() {
+      widget.items.addAll(loadedItems);
+    });
+  }
+
+   void handleAddTask(String name) async{
     final newItem = DataItem(id: DateTime.now().toString(), name: name);
+    await _itemservice.saveItem(newItem);
     setState((){
       widget.items.add(newItem);
     });
   }
 
-  void handleDeleteTask(String id){
+  void handleDeleteTask(String id)async{
+    await _itemservice.deleteItem(id);
     setState(() {
        widget.items.removeWhere((item) => item.id == id);
     });   

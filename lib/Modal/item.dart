@@ -4,4 +4,11 @@ class DataItem{
   DataItem({
     required this.id, 
     required this.name});
+
+  itemMap(){
+    var mapping = Map<String, dynamic>();
+    mapping['id'] = id;
+    mapping['name'] = name;
+    return mapping; 
+  }
 }
